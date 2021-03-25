@@ -9,14 +9,20 @@
 mod console;
 mod panic;
 mod sbi;
-
+mod interrupt;
 global_asm!(include_str!("entry.asm"));
 
 
 #[no_mangle]
 pub extern "C" fn rust_main() -> ! {
-    println!("Hello CenariusYZ!");
-    panic!("end of rust_main")
+    println!("Hello Cena!");
+    interrupt::init();
+
+    unsafe {
+        llvm_asm!("ebreak"::::"Volatile");
+    };
+    loop{};
+
 }
 
 
