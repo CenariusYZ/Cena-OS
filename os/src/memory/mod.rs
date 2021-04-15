@@ -9,8 +9,12 @@
 pub mod address;
 pub mod config;
 pub mod heap;
+pub mod frame;
+pub mod range;
 
-pub use {address::*,config::*};
+pub type MemoryResult<T> = Result<T, &'static str>;
+
+pub use {address::*,config::*,frame::FRAME_ALLOCATOR,range::Range};
 
 /// 初始化内存相关的子模块
 ///
